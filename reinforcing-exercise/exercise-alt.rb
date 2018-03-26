@@ -34,30 +34,11 @@ project = {
   ]
 }
 
-# Update this hash so that each step has the name of a committee member associated with it (i.e. by adding an additional person key in each step hash),
-
-# and each committee member has an equal number of tasks.
-
-# Avoid typing out the committee members' names elsewhere in your code.
-
-# project[:committee].each do |member|
-
-
-# 3.times do |num|
-#      project[:steps][num].store(:member, project[:committee][0])
-#   end
-# 3.times do |num|
-#    project[:steps][num+3].store(:member, project[:committee][1])
-# end
-# 3.times do |num|
-#    project[:steps][num+6].store(:member, project[:committee][2])
-# end
-
 3. times do |sum|
   3.times do |num|
+  # project[:steps].each do |num|
     project[:steps][sum+(3*num)].store(:member, project[:committee][num])
   end
 end
-
 
 p project
