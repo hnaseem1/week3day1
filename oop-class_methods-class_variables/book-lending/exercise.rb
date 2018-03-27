@@ -36,7 +36,7 @@ class Book
     #else current_due_date and remove it from @@on_shelf move to @@on_loan and return true
 
   def return_to_library
-    if lent_out
+    if lent_out?
       @@on_shelf.push(Book.new(@title, @author, @isbn))
       @due_date = nil
       @@on_loan.each do |book|
@@ -80,8 +80,10 @@ class Book
   def self.overdue_books
     overdue = []
     @@on_loan.each do |book|
-      if book.@due_date < Time.now
-        overdue.push(book)
+      if book.due_date == !nil
+        if book.due_date < Time.now
+          overdue.push(book)
+        end
       end
     end
     return overdue
@@ -124,5 +126,3 @@ puts sister_outsider.return_to_library # true
 puts sister_outsider.lent_out? # false
 puts Book.available.inspect # [#<Book:0x00562314676118 @title="Ain't I a Woman?", @author="Bell Hooks", @isbn="9780896081307">, #<Book:0x00562314675fd8 @title="If They Come in the Morning", @author="Angela Y. Davis", @isbn="0893880221">, #<Book:0x00562314676208 @title="Sister Outsider", @author="Audre Lorde", @isbn="9781515905431", @due_date=nil>]
 puts Book.borrowed.inspect # []
-puts Book.borrowed.inspect
-puts Book.available.inspect
