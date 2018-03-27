@@ -12,11 +12,13 @@ class Zombie
   def initialize(speed, strength)
     if speed > @@max_speed
       @speed = @@max_speed
-    elsif strength <= @@default_strength
+    else
+      @speed = speed
+    end
+    if strength <= @@default_strength
       @strength = @@default_strength
     else
       @strength = strength
-      @speed = speed
     end
   end
     # binding.pry
@@ -67,14 +69,14 @@ class Zombie
   end
 
   def self.some_die_off
-    random = Random.rand(@@horde.length + 1) + 1
+    random = Random.rand(10)
       random.times do
         @@horde.delete_at(2)
       end
   end
 
   def self.spawn
-    Random.rand(@@plague_level.abs + 1).times do
+    (Random.rand(@@plague_level.abs + 1)*3).times do
       @@horde.push(Zombie.new(Random.rand(@@max_speed.abs + 1), Random.rand(@@max_strength.abs + 1)))
     end
   end
@@ -82,7 +84,6 @@ class Zombie
   def self.increase_plague_level
       @@plague_level += Random.rand(3)
   end
-
 
   def self.new_day
 
