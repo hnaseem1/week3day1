@@ -11,7 +11,7 @@ class BankAccount
   end
 
   def interest
-    (1 + @@interest_rate)
+    @balance * @@interest_rate
   end
 
   def deposit(value)
@@ -33,6 +33,7 @@ class BankAccount
     end
     return sum
   end
+
   def self.interest_time
     @@accounts.each do |a|
     a.deposit(a.interest)
